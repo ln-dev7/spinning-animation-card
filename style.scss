@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,700;1,700&display=swap");
+
+:root {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-variant-numeric: lining-nums proportional-nums;
+}
+
+body {
+}
+
+h1 {
+  color: #ddb474;
+  font-size: 253.263px;
+  line-height: 150%;
+  &.border {
+    -webkit-text-stroke-width: 4;
+    -webkit-text-stroke-color: #000;
+    font-size: 200px;
+  }
+}
+
+#app {
+}
