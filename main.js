@@ -8,10 +8,26 @@ const out = document.querySelector(".out");
 const mainTitle = document.querySelector(".main-title");
 const circle = document.querySelector(".circle");
 const cartes = document.querySelectorAll(".carte");
+const h1 = document.querySelectorAll(".card-titles h1");
+const cartesContainer = document.querySelector(".cartes");
+
+let intervalId;
+function PlayCartesAnimation(index) {
+  cartesContainer.style.transform = `translate(-50%, 0) rotate(${
+    index * -45
+  }deg)`;
+}
+
+function PlayH1Animation(index) {
+  h1.forEach((h, i) => {
+    h.style.transform = `translateY(${index * -100}%)`;
+  })
+}
 
 start.addEventListener("click", () => {
   gsap.to(start, { opacity: 0, scale: 0.85, y: 50 });
   gsap.to(mainTitle, { opacity: 0, scale: 0.85, y: 50 });
+  gsap.to(".card-titles", { opacity: 1 });
   gsap.to(circle, { y: -150 });
   gsap.to(out, { opacity: 1 });
   Array.from(cartes)
@@ -22,11 +38,22 @@ start.addEventListener("click", () => {
       const y = `${finalValues[index].y}`;
       carte.style.transform = `rotate(${rotate}) translate(${x}, ${y})`;
     });
+  clearInterval(intervalId);
+  let index = 0;
+  intervalId = setInterval(() => {
+    PlayCartesAnimation(index);
+    PlayH1Animation(index);
+    index++;
+    if (index === 8) {
+      index = 0;
+    }
+  }, 1000);
 });
 
 out.addEventListener("click", () => {
   gsap.to(start, { opacity: 1, scale: 1, y: 0 });
-  gsap.to(mainTitle, { opacity: 1, scale: 1, y: 0 });
+  gsap.to(mainTitle, { opacity: 0, scale: 1, y: 0 });
+  gsap.to(".card-titles", { opacity: 0 });
   gsap.to(circle, { y: 0 });
   gsap.to(out, { opacity: 0 });
   Array.from(cartes)
@@ -37,6 +64,11 @@ out.addEventListener("click", () => {
       const y = `${initiaValues[index].y}`;
       carte.style.transform = `rotate(${rotate}) translate(${x}, ${y})`;
     });
+  clearInterval(intervalId);
+  cartesContainer.style.transform = `translate(-50%, 0) rotate(0deg)`;
+  h1.forEach((h, i) => {
+    h.style.transform = `translateY(0)`;
+  })
 });
 
 const initiaValues = [

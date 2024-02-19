@@ -41,14 +41,20 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   font-size: 14px;
-  background: #ddb474;
   z-index: 3;
-  padding: 0.5rem 1.25rem 0.5rem 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  div {
+    background: #ddb474;
+    padding: 0.5rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
   a {
     color: #1e1e1e;
   }
@@ -60,9 +66,29 @@ h1 {
   line-height: 150%;
   z-index: 3;
   &.border {
-    -webkit-text-stroke-width: 4;
-    -webkit-text-stroke-color: #000;
     font-size: 200px;
+    color: #ddb474;
+    -webkit-text-stroke: 2px #965c0d;
+    text-rendering: optimizeSpeed;
+    line-height: 120%;
+  }
+}
+
+.card-titles {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 220px;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 240px;
+  overflow: hidden;
+  h1 {
+    transition: transform 0.75s;
   }
 }
 
@@ -95,8 +121,13 @@ h1 {
   position: absolute;
   left: 50%;
   bottom: 150px;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 0) scale(0);
+  animation: heart 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation-play-state: paused;
   z-index: 3;
+  &:hover {
+    animation-play-state: running;
+  }
 }
 
 .out {
@@ -119,13 +150,14 @@ h1 {
   //background: #000;
   transform-origin: center center;
   z-index: 2;
+  transition: transform 0.75s;
   .carte {
     position: absolute;
     left: 50%;
     top: -450px;
     transform-origin: bottom left;
     width: 230px;
-    transition: transform 0.5s;
+    transition: transform 0.75s;
     &.carte1 {
       transform: rotate(0deg) translate(-50%, 0);
     }
@@ -150,5 +182,17 @@ h1 {
     &.carte8 {
       transform: rotate(-20deg) translate(-50%, 0);
     }
+  }
+}
+
+@keyframes heart {
+  0% {
+    transform: translate(-50%, 0) scale(1);
+  }
+  50% {
+    transform: translate(-50%, 0) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, 0) scale(1);
   }
 }
